@@ -7,16 +7,16 @@ server:
 spring:
   datasource:
     username: root
-    password: 666666
+    password: 123456789
     url: jdbc:mysql://127.0.0.1:3306/activiti?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&nullCatalogMeansCurrent=true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #日志的相关配置
+  activiti:
+    # 建表策略false强制校验，true表不存在则创建
+    database-schema-update: true
+    # 关闭每次启动时候自动部署
+    deployment-mode: never-fail
+    # 关闭自动部署验证
+    check-process-definitions: false
 logging:
   level:
     root: info
-#日志的相关配置
-spring.activiti.history-level: full
-spring.activiti.db-history-used: true
-# spring-activiti
-# 自动部署验证设置:true-开启（默认）、false-关闭
-spring.activiti.check-process-definitions: false
