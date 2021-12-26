@@ -17,6 +17,7 @@ spring:
     deployment-mode: never-fail
     # 关闭自动部署验证
     check-process-definitions: false
+    db-history-used: true
 logging:
   level:
     root: info
