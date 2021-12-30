@@ -5,16 +5,17 @@ import jdk.internal.util.ArraysSupport;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Array<T> {
+
+public class Array<E> {
 
     private final static int DEFAULT_CAPACITY = 5;
 
-    private int size = 0;
+    protected int size = 0;
 
-    private T[] elementData;
+    protected E[] elementData;
 
     public Array() {
-        elementData = (T[]) new Object[DEFAULT_CAPACITY];
+        elementData = (E[]) new Object[DEFAULT_CAPACITY];
     }
 
     public int size() {
@@ -25,7 +26,7 @@ public class Array<T> {
         return size == 0;
     }
 
-    public void add(T t) {
+    public void add(E t) {
         if (elementData.length == size) {
             grow();
         }
@@ -49,13 +50,13 @@ public class Array<T> {
         size--;
     }
 
-    public boolean set(T o, int index) {
+    public boolean set(E o, int index) {
         Objects.checkIndex(index, size);
         elementData[index] = o;
         return false;
     }
 
-    public T get(int index) {
+    public E get(int index) {
         Objects.checkIndex(index, size);
         return elementData[index];
     }
