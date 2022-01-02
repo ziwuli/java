@@ -3,7 +3,7 @@ package com.ziwu.datastructure;
 import java.util.*;
 
 public class LinkedList<E> implements List<E>, Deque<E> {
-    transient int size = 0;
+    int size = 0;
 
     /**
      * Pointer to first node.
@@ -17,7 +17,7 @@ public class LinkedList<E> implements List<E>, Deque<E> {
 
     @Override
     public void addFirst(E e) {
-
+        add(0, e);
     }
 
     @Override
@@ -87,6 +87,7 @@ public class LinkedList<E> implements List<E>, Deque<E> {
 
     @Override
     public boolean offer(E e) {
+        add(e);
         return false;
     }
 
@@ -97,7 +98,7 @@ public class LinkedList<E> implements List<E>, Deque<E> {
 
     @Override
     public E poll() {
-        return null;
+        return remove(0);
     }
 
     @Override
@@ -107,12 +108,12 @@ public class LinkedList<E> implements List<E>, Deque<E> {
 
     @Override
     public E peek() {
-        return null;
+        return get(0);
     }
 
     @Override
     public void push(E e) {
-
+        add(e);
     }
 
     @Override
@@ -155,6 +156,12 @@ public class LinkedList<E> implements List<E>, Deque<E> {
         return null;
     }
 
+    /**
+     * add in last
+     *
+     * @param e
+     * @return
+     */
     @Override
     public boolean add(E e) {
         Node<E> l = last;
@@ -171,43 +178,43 @@ public class LinkedList<E> implements List<E>, Deque<E> {
 
     @Override
     public boolean remove(Object o) {
-        for (Node<E> x = first; x != null; x = x.next) {
-            if (o == null) {
+        if (o == null) {
+            for (Node<E> x = first; x != null; x = x.next) {
                 if (x.element == null) {
                     unlink(x);
                     return true;
                 }
-            } else {
+            }
+        } else {
+            for (Node<E> x = first; x != null; x = x.next) {
                 if (o.equals(x.element)) {
                     unlink(x);
                     return true;
                 }
             }
         }
+
         return false;
     }
 
     private E unlink(Node<E> x) {
-        // assert x != null;
-        final E element = x.element;
-        final Node<E> next = x.next;
-        final Node<E> prev = x.pre;
-
+        E element = x.element;
+        Node<E> prev = x.pre;
+        Node<E> next = x.next;
+        //删除的是第一个元素
         if (prev == null) {
             first = next;
         } else {
+            //设置后驱
             prev.next = next;
-            x.pre = null;
         }
-
+        //删除的是最后一个元素
         if (next == null) {
             last = prev;
         } else {
+            //设置前驱
             next.pre = prev;
-            x.next = null;
         }
-
-        x.element = null;
         size--;
         return element;
     }
@@ -244,39 +251,63 @@ public class LinkedList<E> implements List<E>, Deque<E> {
 
     @Override
     public E get(int index) {
-        return null;
+        return getNode(index).element;
     }
 
     @Override
     public E set(int index, E element) {
-        return null;
+        Node<E> node = getNode(index);
+        E oldVar = node.element;
+        node.element = element;
+        return oldVar;
     }
 
     @Override
     public void add(int index, E element) {
+        isPositionIndex(index);
+        Node<E> x = getNode(index);
+        if (x == null) {
+            add(element);
+            return;
+        }
+        Node<E> prev = x.pre;
+        Node<E> next = x.next;
+        Node<E> newNode = new Node<>(element, x, prev);
+        if (prev == null) {
+            first = newNode;
+        } else {
+            prev.next = newNode;
+        }
+        x.pre = newNode;
+        size++;
+    }
 
+    private boolean isPositionIndex(int index) {
+        return index >= 0 && index <= size;
     }
 
     @Override
     public E remove(int index) {
         Objects.checkIndex(index, size);
-        int base = 0;
+        int i = 0;
         for (Node<E> x = first; x != null; x = x.next) {
-            if (index == base) {
-                Node<E> pre = x.pre;
-                if (pre == null) {
-                    first = x.next;
-                } else {
-                    pre.next = x.next;
-                }
-                if (x.next == null) {
-                    last = pre;
-                } else {
-                    x.next.pre = pre;
-                }
-                size--;
+            if (index == i) {
+                unlink(x);
+                return x.element;
             }
-            base++;
+            i++;
+        }
+        return null;
+    }
+
+    Node<E> getNode(int index) {
+        isPositionIndex(index);
+        int i = 0;
+        for (Node<E> x = first; x != null; x = x.next) {
+            if (index == i) {
+                return x;
+            }
+            i++;
         }
         return null;
     }

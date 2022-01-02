@@ -39,4 +39,52 @@ class LinkedListTest {
         testVal.remove(2);
         Assertions.assertEquals("[1,2]", String.valueOf(testVal.toString()));
     }
+
+    @Test
+    void get() {
+        LinkedList<Integer> testVal = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            testVal.add(i);
+        }
+        Assertions.assertEquals(testVal.get(0), 0);
+        Assertions.assertEquals(testVal.get(1), 1);
+        Assertions.assertEquals(testVal.get(4), 4);
+    }
+
+    @Test
+    void set() {
+        LinkedList<Integer> testVal = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            testVal.add(i);
+        }
+        testVal.set(1, 8);
+        testVal.set(1, 7);
+        testVal.set(4, 6);
+        Assertions.assertEquals("[0,7,2,3,6]", String.valueOf(testVal.toString()));
+    }
+
+    @Test
+    void testAdd() {
+        LinkedList<Integer> testVal = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            testVal.add(i);
+        }
+        testVal.add(1, -1);
+        Assertions.assertEquals("[0,-1,1,2,3,4]", String.valueOf(testVal.toString()));
+        testVal.add(0, -2);
+        Assertions.assertEquals("[-2,0,-1,1,2,3,4]", String.valueOf(testVal.toString()));
+        System.out.println();
+        testVal.add(7, 5);
+        Assertions.assertEquals("[-2,0,-1,1,2,3,4,5]", String.valueOf(testVal.toString()));
+    }
+
+    @Test
+    void testAdd1() {
+        java.util.LinkedList<Integer> testVal = new java.util.LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            testVal.add(i);
+        }
+        testVal.add(5, -1);
+        Assertions.assertEquals("[0,1,2,3,4,-1]", String.valueOf(testVal.toString()));
+    }
 }
