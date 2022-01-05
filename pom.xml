@@ -6,6 +6,8 @@
     <modules>
         <module>activiti</module>
         <module>datastructure</module>
+        <module>agent</module>
+        <module>agent-test</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
