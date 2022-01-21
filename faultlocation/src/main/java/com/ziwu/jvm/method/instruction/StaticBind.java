@@ -3,7 +3,7 @@ package com.ziwu.jvm.method.instruction;
 import org.springframework.util.StopWatch;
 
 /**
- * 内联缓存及退化测试
+ * 内联缓存及退化测试  -XX:CompileCommand=dontinline,*.run
  */
 public class StaticBind {
     public static void main(String[] args) {
