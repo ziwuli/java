@@ -1,5 +1,7 @@
 package com.ziwu.jvm.method.exception;
 
+import java.lang.reflect.Method;
+
 /**
  *  public static void main(java.lang.String[]);
  *     descriptor: ([Ljava/lang/String;)V
@@ -40,6 +42,7 @@ public class ExceptionBytecode {
             int catchBlock = 1;
         } finally {
             int finallyBlock = 2;
+            Method[] declaredMethods = ExceptionBytecode.class.getDeclaredMethods();
         }
         int exit = 3;
     }
