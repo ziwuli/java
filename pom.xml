@@ -10,6 +10,7 @@
         <module>agent-test</module>
         <module>faultlocation</module>
         <module>transactional</module>
+        <module>multiapicontroller</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
