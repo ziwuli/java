@@ -11,6 +11,7 @@
         <module>faultlocation</module>
         <module>transactional</module>
         <module>multiapicontroller</module>
+        <module>kafka</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
