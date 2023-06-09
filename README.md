@@ -1,2 +1,2 @@
 # java
-java version higer than jdk9
+based on jdk17
